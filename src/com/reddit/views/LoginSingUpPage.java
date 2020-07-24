@@ -66,7 +66,7 @@ public class LoginSingUpPage {
         System.out.println("\033[H\033[2J");
         System.out.flush();
         System.out.println("Welcome to reddit ");
-        System.out.println("1. Login \t2.SingUp \t3.login as a guest");
+        System.out.println("1. Login \t2.SingUp \t3.login as a guest\t4.exit");
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Choose a number: ");
@@ -81,6 +81,8 @@ public class LoginSingUpPage {
                 break;
             case 3:
                 loginAsGuest();
+            case 4:
+                return;
             default:
                 render();
                 break;
