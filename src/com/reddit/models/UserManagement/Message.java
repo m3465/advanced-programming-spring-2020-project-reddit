@@ -1,9 +1,6 @@
 package com.reddit.models.UserManagement;
 
-import com.reddit.models.PostManagement.Post;
-
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Date;
 
 public class Message {

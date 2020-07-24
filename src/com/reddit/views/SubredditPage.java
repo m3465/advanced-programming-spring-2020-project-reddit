@@ -4,7 +4,6 @@ import com.reddit.models.PostManagement.Post;
 import com.reddit.models.SubredditManagement.Subreddit;
 import com.reddit.models.SubredditManagement.UserSubredditRelation;
 import com.reddit.models.UserManagement.User;
-import javafx.geometry.Pos;
 
 import java.util.ArrayList;
 import java.util.Scanner;

@@ -3,10 +3,8 @@ package com.reddit.views;
 import com.reddit.models.PostManagement.Post;
 import com.reddit.models.SubredditManagement.Subreddit;
 import com.reddit.models.SubredditManagement.UserSubredditRelation;
-import com.reddit.models.UserManagement.Message;
 import com.reddit.models.UserManagement.User;
 import com.reddit.models.enums.TypeOfRelation;
-import javafx.geometry.Pos;
 
 import java.util.ArrayList;
 import java.util.Scanner;
