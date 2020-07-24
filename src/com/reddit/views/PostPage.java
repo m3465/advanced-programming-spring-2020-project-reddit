@@ -9,7 +9,7 @@ import com.reddit.models.UserManagement.User;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class PostPage<tweet> {
+public class PostPage {
     private User currentUser;
     private Post post;
 
