@@ -46,6 +46,42 @@ public class SubredditPage {
         }
 
     }
+    public void post(){
+        System.out.println("\033[H\033[2J");
+        System.out.flush();
+
+        System.out.println("Enter your post text : ");
+        Scanner scanner = new Scanner(System.in);
+        String  postText = scanner.nextLine();
+
+
+        if (currentUser.hasFollowedSubreddit(subreddit)){
+            Post post = currentUser.newPost(postText,subreddit);
+            PostPage postPage = PostPage.createPostPage(currentUser,post);
+            postPage.render();
+
+        }
+        else{
+            System.out.println("you should follow subreddit to post in it");
+            System.out.println("1. follow this subreddit and continue posting");
+            System.out.println("2. i don't want to follow ");
+
+            int x = scanner.nextInt();
+            scanner.nextLine();
+            if (x==1){
+                currentUser.followSubreddit(subreddit);
+                Post post = currentUser.newPost(postText,subreddit);
+                PostPage postPage = PostPage.createPostPage(currentUser,post);
+                postPage.render();
+
+            }
+            else{
+                HomePage homePage = HomePage.createHomePage(currentUser);
+                homePage.render();
+            }
+        }
+
+    }
 
 
 
@@ -61,7 +97,7 @@ public class SubredditPage {
         ArrayList<Post> subredditPosts = new ArrayList<>(Post.subredditPost(subreddit));
         showPosts(subredditPosts);
 
-        System.out.println("1.Select a post\t2. Back to Home");
+        System.out.println("1.Select a post\t2.new Post\t3. Back to Home");
         System.out.println("Choose your option: ");
         Scanner scanner = new Scanner(System.in);
         int choice = scanner.nextInt();
@@ -80,7 +116,10 @@ public class SubredditPage {
                     postPage.render();
                 }
                 break;
-            case 2 :
+            case 2:
+                post();
+                break;
+            case 3 :
                 HomePage homePage = HomePage.createHomePage(currentUser);
                 homePage.render();
                 break;

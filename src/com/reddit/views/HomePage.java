@@ -196,7 +196,6 @@ public class HomePage {
 
         System.out.println("Home Page for : "+ currentUser.getUsername());
         System.out.println();
-        System.out.println();
 
 
         ArrayList<Post> posts = new ArrayList<>(Post.postsForUser(currentUser));

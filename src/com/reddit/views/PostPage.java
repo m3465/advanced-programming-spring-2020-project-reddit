@@ -6,6 +6,7 @@ import com.reddit.models.PostManagement.Score;
 import com.reddit.models.PostManagement.Post;
 import com.reddit.models.UserManagement.User;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PostPage<tweet> {
@@ -42,19 +43,33 @@ public class PostPage<tweet> {
 
 
     }
+    public void showCommentRepliesScore(Interaction interaction){
+        Comment comment= (Comment)interaction;
+        System.out.println("\t\tScore: "+comment.getScore());
+        System.out.println("\t\treplies:");
+        for (Comment comment1: comment.getReplies()) {
+            System.out.println("\t\t\t"+comment1.getUser().getUsername() + " says:" +comment1.getText());
+        }
+    }
 
 
     public void render(){
         System.out.println("\033[H\033[2J");
         System.out.flush();
+        System.out.println("post page");
 
         post.showPost();
         System.out.println("Comments : ");
-        for (Interaction interaction: post.getInteractions()) {
+        int i=1;
+        ArrayList<Interaction> interactions=new ArrayList<>(post.getInteractions());
+        ArrayList<Comment> comments =new ArrayList<>();
+        for (Interaction interaction: interactions) {
             if (interaction instanceof Comment){
-
-                System.out.print("\t");
+                System.out.print("\t"+ i +". ");
                 ((Comment)interaction).showComment();
+                comments.add((Comment)interaction);
+                showCommentRepliesScore(interaction);
+                ++i;
                 System.out.println();
             }
         }
@@ -68,10 +83,10 @@ public class PostPage<tweet> {
 
         }
         if (!hasLiked){
-            System.out.println("1. Upvoted\t2. Comment\t3. Back Home");
+            System.out.println("1. Upvoted\t2. Comment\t3.Select a comment to reply or like\t4. Back Home");
         }
         else {
-            System.out.println("1. Downvoted\t2. Comment\t3. Back Home");
+            System.out.println("1. Downvoted\t2. Comment\t3.Select a comment to reply or like\t4. Back Home");
         }
         System.out.println("Choose your option: ");
         Scanner scanner = new Scanner(System.in);
@@ -89,7 +104,36 @@ public class PostPage<tweet> {
             case 2:
                 comment();
                 break;
-            case 3:
+            case 3 :
+                System.out.println("enter comment number:");
+                int ch = scanner.nextInt();
+                scanner.nextLine();
+                if (ch>comments.size()){
+                    System.out.println("comment not found");
+                    System.out.println("please press enter key ...");
+                    scanner.nextLine();
+                    render();
+                }
+                else {
+                    Comment comment = comments.get(ch - 1);
+                    System.out.println("1.reply\t2.score");
+                    System.out.println("enter your choice:");
+                    int ch1 = scanner.nextInt();
+                    scanner.nextLine();
+                    if (ch1 == 1) {
+                        System.out.println("enter your reply:");
+                        String text = scanner.nextLine();
+                        comment.reply(currentUser, text);
+                        render();
+                    } else if (ch1 == 2) {
+                        comment.score();
+                        render();
+                    } else {
+                        render();
+                    }
+                }
+                break;
+            case 4:
                 HomePage homePage = HomePage.createHomePage(currentUser);
                 homePage.render();
                 break;

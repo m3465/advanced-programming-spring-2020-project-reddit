@@ -26,7 +26,7 @@ public class Post {
         return new Post(text,subreddit);
     }
     public void showPost(){
-        System.out.println("subreddit "+ subreddit.getName() );
+        System.out.println("subreddit: "+ subreddit.getName() );
         System.out.println(text);
         System.out.println( " Score: " +this.score()+"\t" + "Comments: " +this.countComments()  );
     }
