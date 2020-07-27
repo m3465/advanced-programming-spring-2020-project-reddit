@@ -60,13 +60,11 @@ public class User {
                 chatMessages.add(message);
             }
         }
-        for (User user :User.getUsers()) {
-            for (Message message:user.getMessages()) {
-                if ((message.getReceiver().equals(this))){
-                    chatMessages.add(message);
-                }
-
+        for (Message message:user1.getMessages()) {
+            if ((message.getReceiver().equals(this))){
+                chatMessages.add(message);
             }
+
         }
 
         chatMessages.sort(new Comparator<Message>() {

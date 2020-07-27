@@ -117,6 +117,7 @@ public class ChatsPage {
 
                 }catch(Exception e){
                     System.out.println(e.getMessage());
+                    render();
                 }
                 break;
             default:
